@@ -1,0 +1,268 @@
+{% extends 'base.html' %} {% block head %}
+  <title>Some info about the {{ player_type }}</title>
+{% endblock head %} {% block content %} {% include 'partials/navbar.html' %}
+
+  <main class="grid place-content-center min-h-[35rem] relative">
+    <div
+        class="absolute inset-0 -z-10 transform-gpu overflow-hidden blur-3xl"
+        aria-hidden="true"
+    >
+      <div
+          class="relative aspect-[1155/678] w-[36.125rem] -translate-x-1/3 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-1/2 sm:w-[72.1875rem]"
+          style="
+        clip-path: polygon(
+          74.1% 44.1%,
+          100% 61.6%,
+          97.5% 26.9%,
+          85.5% 0.1%,
+          80.7% 2%,
+          72.5% 32.5%,
+          60.2% 62.4%,
+          52.4% 68.1%,
+          47.5% 58.3%,
+          45.2% 34.5%,
+          27.5% 76.7%,
+          0.1% 64.9%,
+          17.9% 100%,
+          27.6% 76.8%,
+          76.1% 97.7%,
+          74.1% 44.1%
+        );
+      "
+      ></div>
+    </div>
+
+    <form action="/result" method="POST" class="space-y-8">
+      <h1 class="text-xl lg:text-4xl font-semibold">
+        Some info about {% if player_type == "wicketkeeper" %} Wicket-Keeper {% elif player_type == "allrounder" %}
+        All-Rounder {% else %} {{ player_type }} {% endif %} ...
+      </h1>
+      <input
+          type="text"
+          class="hidden"
+          name="player-type"
+          value="{{ player_type }}"
+      />
+      <input type="text" class="hidden" name="year" value="{{ year }}"/>
+      <div class="space-y-2.5">
+        {% if player_type == "batsman" %}
+          <div>
+            <label
+                for="avg"
+                class="block text-sm lg:text-base font-medium leading-6 text-gray-900"
+            >
+              Average of player
+            </label>
+            <div class="relative rounded-md shadow-sm">
+              <input
+                  type="text"
+                  name="avg"
+                  id="avg"
+                  class="block w-full rounded-md border-0 py-1.5 px-4 lg:py-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-inset focus:ring-indigo-600 sm:text-sm lg:text-lg sm:leading-6"
+                  placeholder="Example: 5.33"
+              />
+            </div>
+          </div>
+          <div>
+            <label
+                for="strike-rate"
+                class="block text-sm lg:text-base font-medium leading-6 text-gray-900"
+            >
+              Strike rate
+            </label>
+            <div class="relative rounded-md shadow-sm">
+              <input
+                  type="text"
+                  name="strike-rate"
+                  id="strike-rate"
+                  class="block w-full rounded-md border-0 py-1.5 px-4 lg:py-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-inset focus:ring-indigo-600 sm:text-sm lg:text-lg sm:leading-6"
+                  placeholder="Example: 6.23"
+              />
+            </div>
+          </div>
+          <div>
+            <label
+                for="balls-faced"
+                class="block text-sm lg:text-base font-medium leading-6 text-gray-900"
+            >
+              Number of balls faced
+            </label>
+            <div class="relative rounded-md shadow-sm">
+              <input
+                  type="text"
+                  name="balls-faced"
+                  id="balls-faced"
+                  class="block w-full rounded-md border-0 py-1.5 px-4 lg:py-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-inset focus:ring-indigo-600 sm:text-sm lg:text-lg sm:leading-6"
+                  placeholder="Example: 492"
+              />
+            </div>
+          </div>
+        {% elif player_type == "bowler" %}
+          <div>
+            <label
+                for="wickets-taken"
+                class="block text-sm lg:text-base font-medium leading-6 text-gray-900"
+            >
+              Wicket taken
+            </label>
+            <div class="relative rounded-md shadow-sm">
+              <input
+                  type="text"
+                  name="wickets-taken"
+                  id="wickets-taken"
+                  class="block w-full rounded-md border-0 py-1.5 px-4 lg:py-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-inset focus:ring-indigo-600 sm:text-sm lg:text-lg sm:leading-6"
+                  placeholder="Example: 20 or 53"
+              />
+            </div>
+          </div>
+          <div>
+            <label
+                for="economy"
+                class="block text-sm lg:text-base font-medium leading-6 text-gray-900"
+            >
+              Economy
+            </label>
+            <div class="relative rounded-md shadow-sm">
+              <input
+                  type="text"
+                  name="economy"
+                  id="economy"
+                  class="block w-full rounded-md border-0 py-1.5 px-4 lg:py-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-inset focus:ring-indigo-600 sm:text-sm lg:text-lg sm:leading-6"
+                  placeholder="Example: 6.23"
+              />
+            </div>
+          </div>
+          <div>
+            <label
+                for="avg"
+                class="block text-sm lg:text-base font-medium leading-6 text-gray-900"
+            >
+              Average of player:
+            </label>
+            <div class="relative rounded-md shadow-sm">
+              <input
+                  type="text"
+                  name="avg"
+                  id="avg"
+                  class="block w-full rounded-md border-0 py-1.5 px-4 lg:py-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-inset focus:ring-indigo-600 sm:text-sm lg:text-lg sm:leading-6"
+                  placeholder="Example: 4.92"
+              />
+            </div>
+          </div>
+        {% elif player_type == "wicketkeeper" %}
+          <div>
+            <label
+                for="dismissals"
+                class="block text-sm lg:text-base font-medium leading-6 text-gray-900"
+            >
+              Number of dismissals
+            </label>
+            <div class="relative rounded-md shadow-sm">
+              <input
+                  type="text"
+                  name="dismissals"
+                  id="dismissals"
+                  class="block w-full rounded-md border-0 py-1.5 px-4 lg:py-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-inset focus:ring-indigo-600 sm:text-sm lg:text-lg sm:leading-6"
+                  placeholder="Example: 43"
+              />
+            </div>
+          </div>
+          <div>
+            <label
+                for="avg"
+                class="block text-sm lg:text-base font-medium leading-6 text-gray-900"
+            >
+              Average
+            </label>
+            <div class="relative rounded-md shadow-sm">
+              <input
+                  type="text"
+                  name="avg"
+                  id="avg"
+                  class="block w-full rounded-md border-0 py-1.5 px-4 lg:py-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-inset focus:ring-indigo-600 sm:text-sm lg:text-lg sm:leading-6"
+                  placeholder="Example: 6.23"
+              />
+            </div>
+          </div>
+          <div>
+            <label
+                for="strike-rate"
+                class="block text-sm lg:text-base font-medium leading-6 text-gray-900"
+            >
+              Strike Rate
+            </label>
+            <div class="relative rounded-md shadow-sm">
+              <input
+                  type="text"
+                  name="strike-rate"
+                  id="strike-rate"
+                  class="block w-full rounded-md border-0 py-1.5 px-4 lg:py-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-inset focus:ring-indigo-600 sm:text-sm lg:text-lg sm:leading-6"
+                  placeholder="Example: 4.92"
+              />
+            </div>
+          </div>
+        {% else %} {# all rounder block #}
+          <div>
+            <label
+                for="strike-rate"
+                class="block text-sm lg:text-base font-medium leading-6 text-gray-900"
+            >
+              Strike rate
+            </label>
+            <div class="relative rounded-md shadow-sm">
+              <input
+                  type="text"
+                  name="strike-rate"
+                  id="strike-rate"
+                  class="block w-full rounded-md border-0 py-1.5 px-4 lg:py-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-inset focus:ring-indigo-600 sm:text-sm lg:text-lg sm:leading-6"
+                  placeholder="Example: 5.33"
+              />
+            </div>
+          </div>
+          <div>
+            <label
+                for="ball-avg"
+                class="block text-sm lg:text-base font-medium leading-6 text-gray-900"
+            >
+              Balling Average
+            </label>
+            <div class="relative rounded-md shadow-sm">
+              <input
+                  type="text"
+                  name="ball-avg"
+                  id="ball-avg"
+                  class="block w-full rounded-md border-0 py-1.5 px-4 lg:py-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-inset focus:ring-indigo-600 sm:text-sm lg:text-lg sm:leading-6"
+                  placeholder="Example: 34.2"
+              />
+            </div>
+          </div>
+          <div>
+            <label
+                for="bat-avg"
+                class="block text-sm lg:text-base font-medium leading-6 text-gray-900"
+            >
+              Batting Average
+            </label>
+            <div class="relative rounded-md shadow-sm">
+              <input
+                  type="text"
+                  name="bat-avg"
+                  id="bat-avg"
+                  class="block w-full rounded-md border-0 py-1.5 px-4 lg:py-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-inset focus:ring-indigo-600 sm:text-sm lg:text-lg sm:leading-6"
+                  placeholder="Example: 42.5"
+              />
+            </div>
+          </div>
+        {% endif %}
+      </div>
+      <div class="text-center">
+        <button
+            type="submit"
+            class="mx-auto rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </main>
+{% endblock content %}
